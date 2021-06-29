@@ -4,7 +4,23 @@ Arduino library to enable a dual paddle clutch for sim racing
 ### TO-DO
 * Add bitepoint set button support
 
-## Usage
+## In-Game Usage
+
+The two clutch paddles are used together with either a third potentiometer or a bite point set button to enhance a car's launch from a standing start.
+
+The right paddle is a master clutch paddle. This is always bound to the clutch from 0-100%, so can be used in an emergency to prevent stalling.
+The left paddle is an adjustable range clutch paddle. It is bound from 0 to the bite point set value, which can be adjusted with a potentiometer or button.
+
+Before a race start, the driver will stop on the track, enter first gear and input full throttle. Depending on which method of bite point set you choose (potentiomer or button), perform the following:
+#### With bite point set potentiometer
+* With the left paddle held in, turn the bite point set potentiometer until the car starts to move.
+#### With bite point set button
+* With the right paddle held in, slowly release the paddle until the car starts to move, then press the bite point set button.
+
+
+On a race start, the driver will stop on the track, enter first gear and input full throttle. Holding in both paddles, when the race starts, quickly release the right paddle and slowly release the left paddle to launch the car with minimal wheelspin.
+
+## Arduino Usage
 
 * Copy the PaddleClutch.h class into your working directory
 * Import the PaddleClutch class into your arduino sketch
@@ -43,5 +59,5 @@ Arduino library to enable a dual paddle clutch for sim racing
   
   ## Example
   
-  I have attached a sample .ino sketch (PaddleClutchMain.ino) that demonstrates usage of the class. It uses a third potentiometer as the bitepoint value and updates the Throttle axis on the Joystick.
+  I have attached a sample .ino sketch (PaddleClutchMain.ino) that demonstrates usage of the class. It uses a third potentiometer as the bitepoint value and updates the Throttle axis on the Joystick as well as outputting the two paddle positions and the clutch output to the serial port.
   
