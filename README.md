@@ -1,6 +1,9 @@
 # PaddleClutch
 Arduino library to enable a dual paddle clutch for sim racing
 
+### TO-DO
+* Add bitepoint set button support
+
 ## Usage
 
 * Copy the PaddleClutch.h class into your working directory
