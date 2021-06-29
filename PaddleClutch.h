@@ -16,63 +16,64 @@ class PaddleClutch
 {
 
   public:
+  
+    struct calibration
+    {
+      uint16_t lpMin;
+      uint16_t lpMax;
+      uint16_t rpMin;
+      uint16_t rpMax;
+      uint16_t btptMin; //for potentiometer bitepoint
+      uint16_t btptMax; //for potentiometer bitepoint
+      uint16_t btptValue;
+    } calibVals;
+  
     //initialise PaddleClutch
     PaddleClutch(int leftPaddlePin, int rightPaddlePin)
     {
-		this->leftPaddlePin = leftPaddlePin;
-		this->rightPaddlePin = rightPaddlePin;
+      //this->leftPaddlePin = leftPaddlePin;
+      //this->rightPaddlePin = rightPaddlePin;
     }
-	
-	uint16_t getClutchOutput(uint16_t leftPaddleReading, uint16_t rightPaddleReading)
-	{
-		int leftPaddleVal = analogRead(leftPaddlePin);
-		int leftPaddleConstVal = constrain(leftPaddleVal, calibVals.lpMin, calibVals.lpMax);
-		int leftPaddleMappedVal = map(leftPaddleConstVal, calibVals.lpMin, calibVals.lpMax, 0, 65535);
 
-		int rightPaddleVal = analogRead(rightPaddlePin);
-		int rightPaddleConstVal = constrain(rightPaddleVal, calibVals.rpMin, calibVals.rpMax);
-		int rightPaddleMappedVal = map(rightPaddleConstVal, calibVals.rpMin, calibVals.rpMax, 0, 65535);
+    uint16_t getClutchOutput(uint16_t leftPaddleReading, uint16_t rightPaddleReading)
+    {
+      uint16_t leftPaddleConstVal = constrain(leftPaddleReading, calibVals.lpMin, calibVals.lpMax);
+      uint16_t leftPaddleMappedVal = map(leftPaddleConstVal, calibVals.lpMin, calibVals.lpMax, 0, 65535);
 
-		int leftPaddleMapped = map(leftPaddleMappedVal, 0, 65535, 0, btptValue); //map left paddle max to btpt pot val
+      uint16_t rightPaddleConstVal = constrain(rightPaddleReading, calibVals.rpMin, calibVals.rpMax);
+      uint16_t rightPaddleMappedVal = map(rightPaddleConstVal, calibVals.rpMin, calibVals.rpMax, 0, 65535);
 
-		if (rightPaddleMappedVal > leftPaddleMapped) //if right paddle val is higher than left
-			return rightPaddleMappedVal; //set output val to right paddle
-		else
-			return leftPaddleMapped; //set output val to left paddle
-	}
-	
-	uint16_t updateBitePoint(uint16_t value)
-	{
-		int btptConstVal = constrain(value, calibVals.btptMin, calibVals.btptMax);
-		int btptMappedVal = map(btptConstVal, calibVals.btptMin, calibVals.btptMax, 0, 65535);
-	}
-	
-	void setLeftPaddleRange(uint16_t min, uint16_t max)
-	{
-		lpMin = min;
-		lpMax = max;
-	}
-	
-	void setLeftPaddleRange(uint16_t min, uint16_t max)
-	{
-		rpMin = min;
-		rpMax = max;
-	}
+      uint16_t leftPaddleMapped = map(leftPaddleMappedVal, 0, 65535, 0, calibVals.btptValue); //map left paddle max to btpt pot val
+
+      if (rightPaddleMappedVal > leftPaddleMapped) //if right paddle val is higher than left
+        return rightPaddleMappedVal; //set output val to right paddle
+      else
+        return leftPaddleMapped; //set output val to left paddle
+    }
+
+    uint16_t updateBitePoint(uint16_t value)
+    {
+      uint16_t btptConstVal = constrain(value, calibVals.btptMin, calibVals.btptMax);
+      uint16_t btptMappedVal = map(btptConstVal, calibVals.btptMin, calibVals.btptMax, 0, 65535);
+      calibVals.btptValue = btptMappedVal;
+    }
+
+    void setLeftPaddleRange(uint16_t min, uint16_t max)
+    {
+      calibVals.lpMin = min;
+      calibVals.lpMax = max;
+    }
+
+    void setRightPaddleRange(uint16_t min, uint16_t max)
+    {
+      calibVals.rpMin = min;
+      calibVals.rpMax = max;
+    }
 
   private:
-  
-  int leftPaddlePin;
-  int rightPaddlePin;
-  uint16_t btptValue;
-  
-  struct calibration
-  {
-	uint16_t lpMin;
-	uint16_t lpMax;
-	uint16_t rpMin;
-	uint16_t rpMax;
-	uint16_t btptValue;
-  } calibVals;
+
+    int leftPaddlePin;
+    int rightPaddlePin;
 
 };
 
