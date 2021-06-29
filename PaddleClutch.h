@@ -2,6 +2,7 @@
 /*
   PaddleClutch.h - PaddleClutch manager class
   Created by Morgan Gardner, December 10th, 2020.
+  Modified by Morgan Gardner, June 29th, 2021.
   Released under the GPL-3.0 license.
 */
 
@@ -28,11 +29,9 @@ class PaddleClutch
       uint16_t btptValue;
     } calibVals;
   
-    //initialise PaddleClutch
-    PaddleClutch(int leftPaddlePin, int rightPaddlePin)
+    PaddleClutch()
     {
-      //this->leftPaddlePin = leftPaddlePin;
-      //this->rightPaddlePin = rightPaddlePin;
+
     }
 
     uint16_t getClutchOutput(uint16_t leftPaddleReading, uint16_t rightPaddleReading)
