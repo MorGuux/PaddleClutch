@@ -1,9 +1,6 @@
 # PaddleClutch
 Arduino library to enable a dual paddle clutch for sim racing
 
-### TO-DO
-* Add bitepoint set button support
-
 ## In-Game Usage
 
 The two clutch paddles are used together with either a third potentiometer or a bite point set button to enhance a car's launch from a standing start.
