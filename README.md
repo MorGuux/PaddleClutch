@@ -33,28 +33,28 @@ On a race start, the driver will stop on the track, enter first gear and input f
   clutchOutput = PaddleClutchManager.getClutchOutput(leftPaddleValue, rightPaddleValue);
   ```
   
-  You can use
+  With a bite point set potentiometer, you can use
   ```C
   PaddleClutchManager.updateBitePoint(bitePointValue)
   ```
-  to update the bite point value.
-  
-  You can also specify the clutch axis ranges by settings the variables in the associated struct
+  to update the bite point value. Otherwise, with a bite point set button, use
   ```C
-  PaddleClutchManager.calibVals.lpMin = 0;      //left paddle minimum
-  PaddleClutchManager.calibVals.lpMax = 1023;   //left paddle maximum
+  PaddleClutchManager.updateBitePoint()
+  ```
+  and the current value of the right clutch paddle will be used as the bite point.
   
-  PaddleClutchManager.calibVals.rpMin = 0;      //right paddle minimum
-  PaddleClutchManager.calibVals.rpMax = 1023;   //right paddle maximum
+  You can also specify the clutch axis ranges by using the following methods:
+  ```C
+  PaddleClutchManager.setLeftPaddleRange(0, 1023);
   
-  PaddleClutchManager.calibVals.btptMin = 0;    //bitepoint minimum (for potentiometer bitepoint)
-  PaddleClutchManager.calibVals.btptMax = 1023; //bitepoint maximum (for potentiometer bitepoint)
-  PaddleClutchManager.calibVals.btptValue = 0;  //bitepoint value
+  PaddleClutchManager.setRightPaddleRange(0, 1023);
+  
+  PaddleClutchManager.setBitePointPotRange(0, 1023);
   ```
   
   There is no hardware implementation in the PaddleClutch.h class, so that different hardware with different resolutions can be used (potentiometers, hall effect sensors, ADS10XX modules etc). The resulting clutch output value is scaled to 16-bit for use with the Joystick library.
   
   ## Example
   
-  I have attached a sample .ino sketch (PaddleClutchMain.ino) that demonstrates usage of the class. It uses a third potentiometer as the bitepoint value and updates the Throttle axis on the Joystick as well as outputting the two paddle positions and the clutch output to the serial port.
+  I have attached two sketches that demonstrates usage of the class with both bite point set methods. Both update the Throttle axis on the Joystick as well as output the two paddle positions, the bite point value and the clutch output to the serial port.
   
