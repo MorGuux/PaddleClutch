@@ -2,7 +2,7 @@
 /*
   PaddleClutch.h - PaddleClutch manager class
   Created by Morgan Gardner, December 10th, 2020.
-  Modified by Morgan Gardner, June 29th, 2021.
+  Modified by Morgan Gardner, June 30th, 2021.
   Released under the GPL-3.0 license.
 */
 
@@ -38,9 +38,11 @@ class PaddleClutch
     {
       uint16_t leftPaddleConstVal = constrain(leftPaddleReading, calibVals.lpMin, calibVals.lpMax);
       uint16_t leftPaddleMappedVal = map(leftPaddleConstVal, calibVals.lpMin, calibVals.lpMax, 0, 65535);
+      this->lpValue = leftPaddleMappedVal;
 
       uint16_t rightPaddleConstVal = constrain(rightPaddleReading, calibVals.rpMin, calibVals.rpMax);
       uint16_t rightPaddleMappedVal = map(rightPaddleConstVal, calibVals.rpMin, calibVals.rpMax, 0, 65535);
+      this->rpValue = rightPaddleMappedVal;
 
       uint16_t leftPaddleMapped = map(leftPaddleMappedVal, 0, 65535, 0, calibVals.btptValue); //map left paddle max to btpt pot val
 
@@ -50,11 +52,16 @@ class PaddleClutch
         return leftPaddleMapped; //set output val to left paddle
     }
 
-    uint16_t updateBitePoint(uint16_t value)
+    uint16_t updateBitePoint(uint16_t value)  //potentiometer bite point set
     {
       uint16_t btptConstVal = constrain(value, calibVals.btptMin, calibVals.btptMax);
       uint16_t btptMappedVal = map(btptConstVal, calibVals.btptMin, calibVals.btptMax, 0, 65535);
       calibVals.btptValue = btptMappedVal;
+    }
+
+    uint16_t updateBitePoint()  //button bite point set
+    {
+      calibVals.btptValue = rpValue;
     }
 
     void setLeftPaddleRange(uint16_t min, uint16_t max)
@@ -69,10 +76,16 @@ class PaddleClutch
       calibVals.rpMax = max;
     }
 
+    void setBitePointPotRange(uint16_t min, uint16_t max)
+    {
+      calibVals.btptMin = min;
+      calibVals.btptMax = max;
+    }
+
   private:
 
-    int leftPaddlePin;
-    int rightPaddlePin;
+  uint16_t lpValue;   //left paddle value
+  uint16_t rpValue;   //right paddle value
 
 };
 
