@@ -10,7 +10,6 @@
 #define PaddleClutch_h
 
 #include "Arduino.h"
-#include <Smoothed.h>
 
 class PaddleClutch
 {
