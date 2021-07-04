@@ -1,8 +1,6 @@
 #include <Joystick.h>
 Joystick_ Joystick;
 
-#include <EEPROM.h>
-
 #include "PaddleClutch.h"
 
 PaddleClutch PaddleClutchManager;
