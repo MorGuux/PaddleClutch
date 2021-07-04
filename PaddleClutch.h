@@ -11,7 +11,6 @@
 
 #include "Arduino.h"
 #include <Smoothed.h>
-#include <EEPROM.h>
 
 class PaddleClutch
 {
