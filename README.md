@@ -8,7 +8,7 @@ The two clutch paddles are used together with either a third potentiometer or a 
 The right paddle is a master clutch paddle. This is always bound to the clutch from 0-100%, so can be used in an emergency to prevent stalling.
 The left paddle is an adjustable range clutch paddle. It is bound from 0 to the bite point set value, which can be adjusted with a potentiometer or button.
 
-Before a race start, the driver will stop on the track, enter first gear and input full throttle. Depending on which method of bite point set you choose (potentiomer or button), perform the following:
+Before a race start, the driver will stop on the track, enter first gear and input full throttle. Depending on which method of bite point set you choose (potentiometer or button), perform the following:
 #### With bite point set potentiometer
 * With the left paddle held in, turn the bite point set potentiometer until the car starts to move.
 #### With bite point set button
