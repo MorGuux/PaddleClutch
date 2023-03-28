@@ -491,8 +491,8 @@ SHPWMPin shCONSPIN(CONS_PIN, 40);
 #define GAMEPAD_AXIS_CLUTCH_RIGHT_EXPONENTIALFACTOR 1 //{"Name":"GAMEPAD_AXIS_CLUTCH_RIGHT_EXPONENTIALFACTOR","Title":"Paddle clutch right paddle exponential correction","DefaultValue":"1","Type":"double","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0","dMin":0.1,"dMax":1.9}
 #define GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE 2          //{"Name":"GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE","Title":"Paddle clutch bitepoint type","DefaultValue":"0","Type":"list","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0","ListValues":"0,Potentiometer;1,Button;2,RaceX plugin"}
 #define GAMEPAD_AXIS_CLUTCH_BITEPOINT_PIN 0    		  //{"Name":"GAMEPAD_AXIS_CLUTCH_BITEPOINT_PIN","Title":"Paddle clutch bite point pin","DefaultValue":"0","Type":"pin;Bite point input","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0&&GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE!=2"}
-#define GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MINVALUE 0  //{"Name":"GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MINVALUE","Title":"Paddle clutch bite point potentiometer minimum value","DefaultValue":"0","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE==0"}
-#define GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MAXVALUE 1023 //{"Name":"GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MAXVALUE","Title":"Paddle clutch bite point potentiometer maximum value","DefaultValue":"1023","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE==0"}
+#define GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MINVALUE 0  //{"Name":"GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MINVALUE","Title":"Paddle clutch bite point potentiometer minimum value","DefaultValue":"0","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0&&GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE==0"}
+#define GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MAXVALUE 1023 //{"Name":"GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MAXVALUE","Title":"Paddle clutch bite point potentiometer maximum value","DefaultValue":"1023","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0&&GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE==0"}
 
 
 #if(GAMEPAD_AXIS_01_ENABLED == 1)
