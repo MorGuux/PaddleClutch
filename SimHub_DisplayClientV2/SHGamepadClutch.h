@@ -12,6 +12,8 @@ private:
   bool isBitePointButton = false;
   bool isRaceXControlled = false;
 
+  bool bitePointPullup = false;
+
   int lastAxisValue = -1;
 
   int leftPaddlePin = -1;
@@ -75,7 +77,7 @@ public:
   }
 
   //Button
-  SHGamepadClutch(byte leftPaddlePin, byte rightPaddlePin, byte bitePointPin, int leftMinimumInputValue, int leftMaximumInputValue, double leftExponentialFactor, int rightMinimumInputValue, int rightMaximumInputValue, double rightExponentialFactor) {
+  SHGamepadClutch(byte leftPaddlePin, byte rightPaddlePin, byte bitePointPin, int leftMinimumInputValue, int leftMaximumInputValue, double leftExponentialFactor, int rightMinimumInputValue, int rightMaximumInputValue, double rightExponentialFactor, bool pullup) {
 
     this->leftPaddlePin = leftPaddlePin;
     this->rightPaddlePin = rightPaddlePin;
@@ -90,8 +92,9 @@ public:
     this->paddleClutch.setLeftPaddleRange(0, 1023);
     this->paddleClutch.setRightPaddleRange(0, 1023);
     this->isBitePointButton = true;
+    this->bitePointPullup = pullup;
 
-    pinMode(bitePointPin, INPUT_PULLUP);
+    pinMode(bitePointPin, bitePointPullup ? INPUT_PULLUP : INPUT);
 
     this->samplingRate = 10;
   }
@@ -154,7 +157,7 @@ public:
 
     if (!isRaceXControlled) {
       if (isBitePointButton) {
-        if (digitalRead(bitePointPin) == LOW) {
+        if (digitalRead(bitePointPin) == (bitePointPullup ? LOW : HIGH)) {
           this->paddleClutch.updateBitePoint();
         }
       } else {

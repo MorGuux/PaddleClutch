@@ -74,8 +74,8 @@
 #include "SHButton.h"
 
 // ----------------------------------------------------- HW SETTINGS, PLEASE REVIEW ALL -------------------------------------------
-#define DEVICE_NAME "SimHub Dash" //{"Group":"General","Name":"DEVICE_NAME","Title":"Device name,\r\n make sure to use a unique name when using multiple arduinos","DefaultValue":"SimHub Dash","Type":"string","Template":"#define DEVICE_NAME \"{0}\""}
-#define DEVICE_UNIQUE_ID "f076dbb8-55ef-4645-9c98-ce251a358473" //{"UniqueId":"f076dbb8-55ef-4645-9c98-ce251a358473","Name":"DEVICE_UNIQUE_ID","Type":"uniqueid"}
+#define DEVICE_NAME "PaddleClutch" //{"Group":"General","Name":"DEVICE_NAME","Title":"Device name,\r\n make sure to use a unique name when using multiple arduinos","DefaultValue":"SimHub Dash","Type":"string","Template":"#define DEVICE_NAME \"{0}\""}
+#define DEVICE_UNIQUE_ID "f4437e75-9ce2-4eb0-811a-c5cdd79ba0b8" //{"UniqueId":"f4437e75-9ce2-4eb0-811a-c5cdd79ba0b8","Name":"DEVICE_UNIQUE_ID","Type":"uniqueid"}
 
 #define ENABLE_MICRO_GAMEPAD 1           //{"Group":"GAMEPAD","Name":"ENABLE_MICRO_GAMEPAD","Title":"Enable arduino micro gamepad output for all the activated buttons/encoders","DefaultValue":"0","Type":"bool"}
 #define MICRO_GAMEPAD_ENCODERPRESSTIME 50 //{"Name":"MICRO_GAMEPAD_ENCODERPRESSTIME","Title":"Define how long (in milliseconds) the encoder related button will be hold after an encoder movement","DefaultValue":"50","Type":"int","Condition":"ENABLE_MICRO_GAMEPAD>0","Max":100}
@@ -481,18 +481,19 @@ SHPWMPin shCONSPIN(CONS_PIN, 40);
 #define GAMEPAD_AXIS_03_EXPONENTIALFACTOR 1           //{"Name":"GAMEPAD_AXIS_03_EXPONENTIALFACTOR","Title":"Brake axis exponential correction","DefaultValue":"1","Type":"double","Condition":"GAMEPAD_AXIS_03_ENABLED>0","dMin":0.1,"dMax":1.9}
 
 #define GAMEPAD_AXIS_CLUTCH_ENABLED 1                 //{"Name":"GAMEPAD_AXIS_CLUTCH_ENABLED","Title":"Paddle clutch enabled","DefaultValue":"0","Type":"bool"}
-#define GAMEPAD_AXIS_CLUTCH_LEFT_PIN 0                //{"Name":"GAMEPAD_AXIS_CLUTCH_LEFT_PIN","Title":"Paddle clutch left paddle pin","DefaultValue":"0","Type":"pin;Left clutch input","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0"}
+#define GAMEPAD_AXIS_CLUTCH_LEFT_PIN 18               //{"Name":"GAMEPAD_AXIS_CLUTCH_LEFT_PIN","Title":"Paddle clutch left paddle pin","DefaultValue":"0","Type":"pin;Left clutch input","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0"}
 #define GAMEPAD_AXIS_CLUTCH_LEFT_MINVALUE 0           //{"Name":"GAMEPAD_AXIS_CLUTCH_LEFT_MINVALUE","Title":"Paddle clutch left paddle minimum value","DefaultValue":"0","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0"}
 #define GAMEPAD_AXIS_CLUTCH_LEFT_MAXVALUE 1023        //{"Name":"GAMEPAD_AXIS_CLUTCH_LEFT_MAXVALUE","Title":"Paddle clutch left paddle maximum value","DefaultValue":"1023","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0"}
 #define GAMEPAD_AXIS_CLUTCH_LEFT_EXPONENTIALFACTOR 1  //{"Name":"GAMEPAD_AXIS_CLUTCH_LEFT_EXPONENTIALFACTOR","Title":"Paddle clutch left paddle exponential correction","DefaultValue":"1","Type":"double","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0","dMin":0.1,"dMax":1.9}
-#define GAMEPAD_AXIS_CLUTCH_RIGHT_PIN 0               //{"Name":"GAMEPAD_AXIS_CLUTCH_RIGHT_PIN","Title":"Paddle clutch right paddle pin","DefaultValue":"0","Type":"pin;Right clutch input","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0"}
+#define GAMEPAD_AXIS_CLUTCH_RIGHT_PIN 20              //{"Name":"GAMEPAD_AXIS_CLUTCH_RIGHT_PIN","Title":"Paddle clutch right paddle pin","DefaultValue":"0","Type":"pin;Right clutch input","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0"}
 #define GAMEPAD_AXIS_CLUTCH_RIGHT_MINVALUE 0          //{"Name":"GAMEPAD_AXIS_CLUTCH_RIGHT_MINVALUE","Title":"Paddle clutch right paddle minimum value","DefaultValue":"0","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0"}
 #define GAMEPAD_AXIS_CLUTCH_RIGHT_MAXVALUE 1023       //{"Name":"GAMEPAD_AXIS_CLUTCH_RIGHT_MAXVALUE","Title":"Paddle clutch right paddle maximum value","DefaultValue":"1023","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0"}
 #define GAMEPAD_AXIS_CLUTCH_RIGHT_EXPONENTIALFACTOR 1 //{"Name":"GAMEPAD_AXIS_CLUTCH_RIGHT_EXPONENTIALFACTOR","Title":"Paddle clutch right paddle exponential correction","DefaultValue":"1","Type":"double","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0","dMin":0.1,"dMax":1.9}
-#define GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE 2          //{"Name":"GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE","Title":"Paddle clutch bitepoint type","DefaultValue":"0","Type":"list","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0","ListValues":"0,Potentiometer;1,Button;2,RaceX plugin"}
-#define GAMEPAD_AXIS_CLUTCH_BITEPOINT_PIN 0    		  //{"Name":"GAMEPAD_AXIS_CLUTCH_BITEPOINT_PIN","Title":"Paddle clutch bite point pin","DefaultValue":"0","Type":"pin;Bite point input","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0&&GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE!=2"}
+#define GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE 1          //{"Name":"GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE","Title":"Paddle clutch bite point type","DefaultValue":"0","Type":"list","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0","ListValues":"0,Potentiometer;1,Button;2,RaceX plugin"}
+#define GAMEPAD_AXIS_CLUTCH_BITEPOINT_PIN 19          //{"Name":"GAMEPAD_AXIS_CLUTCH_BITEPOINT_PIN","Title":"Paddle clutch bite point pin","DefaultValue":"0","Type":"pin;Bite point input","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0&&GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE!=2"}
 #define GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MINVALUE 0  //{"Name":"GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MINVALUE","Title":"Paddle clutch bite point potentiometer minimum value","DefaultValue":"0","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0&&GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE==0"}
 #define GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MAXVALUE 1023 //{"Name":"GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MAXVALUE","Title":"Paddle clutch bite point potentiometer maximum value","DefaultValue":"1023","Type":"int","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0&&GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE==0"}
+#define GAMEPAD_AXIS_CLUTCH_BITEPOINT_BUTTON_TYPE 1   //{"Name":"GAMEPAD_AXIS_CLUTCH_BITEPOINT_BUTTON_TYPE","Title":"Paddle clutch bite point button pullup","DefaultValue":"0","Type":"bool","Condition":"GAMEPAD_AXIS_CLUTCH_ENABLED>0&&GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE==1"}
 
 
 #if(GAMEPAD_AXIS_01_ENABLED == 1)
@@ -512,10 +513,10 @@ SHGamepadAxis SHGAMEPADAXIS03(GAMEPAD_AXIS_03_PIN, 2, GAMEPAD_AXIS_03_MINVALUE, 
 	#if(GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE == 0)
 	SHGamepadClutch SHGAMEPADCLUTCH(GAMEPAD_AXIS_CLUTCH_LEFT_PIN, GAMEPAD_AXIS_CLUTCH_RIGHT_PIN, GAMEPAD_AXIS_CLUTCH_BITEPOINT_PIN, GAMEPAD_AXIS_CLUTCH_LEFT_MINVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_EXPONENTIALFACTOR, GAMEPAD_AXIS_CLUTCH_RIGHT_MINVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_EXPONENTIALFACTOR, GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MINVALUE, GAMEPAD_AXIS_CLUTCH_POTENTIOMETER_MAXVALUE);
 	#elif(GAMEPAD_AXIS_CLUTCH_BITEPOINT_TYPE == 1)
-	SHGamepadClutch SHGAMEPADCLUTCH(GAMEPAD_AXIS_CLUTCH_LEFT_PIN, GAMEPAD_AXIS_CLUTCH_RIGHT_PIN, GAMEPAD_AXIS_CLUTCH_BITEPOINT_PIN, GAMEPAD_AXIS_CLUTCH_LEFT_MINVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_EXPONENTIALFACTOR, GAMEPAD_AXIS_CLUTCH_RIGHT_MINVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_EXPONENTIALFACTOR);
+	SHGamepadClutch SHGAMEPADCLUTCH(GAMEPAD_AXIS_CLUTCH_LEFT_PIN, GAMEPAD_AXIS_CLUTCH_RIGHT_PIN, GAMEPAD_AXIS_CLUTCH_BITEPOINT_PIN, GAMEPAD_AXIS_CLUTCH_LEFT_MINVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_EXPONENTIALFACTOR, GAMEPAD_AXIS_CLUTCH_RIGHT_MINVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_EXPONENTIALFACTOR, GAMEPAD_AXIS_CLUTCH_BITEPOINT_BUTTON_TYPE);
 	#else
-  SHGamepadClutch SHGAMEPADCLUTCH(GAMEPAD_AXIS_CLUTCH_LEFT_PIN, GAMEPAD_AXIS_CLUTCH_RIGHT_PIN, GAMEPAD_AXIS_CLUTCH_LEFT_MINVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_EXPONENTIALFACTOR, GAMEPAD_AXIS_CLUTCH_RIGHT_MINVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_EXPONENTIALFACTOR);
-  #endif
+  	SHGamepadClutch SHGAMEPADCLUTCH(GAMEPAD_AXIS_CLUTCH_LEFT_PIN, GAMEPAD_AXIS_CLUTCH_RIGHT_PIN, GAMEPAD_AXIS_CLUTCH_LEFT_MINVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_LEFT_EXPONENTIALFACTOR, GAMEPAD_AXIS_CLUTCH_RIGHT_MINVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_MAXVALUE, GAMEPAD_AXIS_CLUTCH_RIGHT_EXPONENTIALFACTOR);
+  	#endif
 #endif
 
 #endif // INCLUDE_GAMEPAD
