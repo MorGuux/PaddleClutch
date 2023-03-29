@@ -57,6 +57,11 @@ class PaddleClutch
       calibVals.btptValue = btptMappedVal;
     }
 
+    uint16_t updateBitePointPercent(uint16_t value)  //RaceX bite point set (0-100%)
+    {
+      calibVals.btptValue = map(value, 0, 100, 0, 1023);
+    }
+
     uint16_t updateBitePoint()  //button bite point set
     {
       calibVals.btptValue = rpValue;

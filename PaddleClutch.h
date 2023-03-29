@@ -35,14 +35,14 @@ class PaddleClutch
     uint16_t getClutchOutput(uint16_t leftPaddleReading, uint16_t rightPaddleReading)
     {
       uint16_t leftPaddleConstVal = constrain(leftPaddleReading, calibVals.lpMin, calibVals.lpMax);
-      uint16_t leftPaddleMappedVal = map(leftPaddleConstVal, calibVals.lpMin, calibVals.lpMax, 0, 65535);
+      uint16_t leftPaddleMappedVal = map(leftPaddleConstVal, calibVals.lpMin, calibVals.lpMax, 0, 1023);
       this->lpValue = leftPaddleMappedVal;
 
       uint16_t rightPaddleConstVal = constrain(rightPaddleReading, calibVals.rpMin, calibVals.rpMax);
-      uint16_t rightPaddleMappedVal = map(rightPaddleConstVal, calibVals.rpMin, calibVals.rpMax, 0, 65535);
+      uint16_t rightPaddleMappedVal = map(rightPaddleConstVal, calibVals.rpMin, calibVals.rpMax, 0, 1023);
       this->rpValue = rightPaddleMappedVal;
 
-      uint16_t leftPaddleMapped = map(leftPaddleMappedVal, 0, 65535, 0, calibVals.btptValue); //map left paddle max to btpt pot val
+      uint16_t leftPaddleMapped = map(leftPaddleMappedVal, 0, 1023, 0, calibVals.btptValue); //map left paddle max to btpt pot val
 
       if (rightPaddleMappedVal > leftPaddleMapped) //if right paddle val is higher than left
         return rightPaddleMappedVal; //set output val to right paddle
@@ -53,8 +53,13 @@ class PaddleClutch
     uint16_t updateBitePoint(uint16_t value)  //potentiometer bite point set
     {
       uint16_t btptConstVal = constrain(value, calibVals.btptMin, calibVals.btptMax);
-      uint16_t btptMappedVal = map(btptConstVal, calibVals.btptMin, calibVals.btptMax, 0, 65535);
+      uint16_t btptMappedVal = map(btptConstVal, calibVals.btptMin, calibVals.btptMax, 0, 1023);
       calibVals.btptValue = btptMappedVal;
+    }
+
+    uint16_t updateBitePointPercent(uint16_t value)  //RaceX bite point set (0-100%)
+    {
+      calibVals.btptValue = map(value, 0, 100, 0, 1023);
     }
 
     uint16_t updateBitePoint()  //button bite point set

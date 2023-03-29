@@ -124,8 +124,9 @@ public:
     update();
   }
 
+  // RaceX bitepoint set (percentage 0-100)
   void setBitePoint(uint16_t value) {
-    this->paddleClutch.updateBitePoint(value);
+    this->paddleClutch.updateBitePointPercent(value);
   }
 
   int read(byte pin, double exponentialFactor, int minimumInputValue, int maximumInputValue) {
