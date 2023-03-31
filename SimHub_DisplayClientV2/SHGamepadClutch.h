@@ -55,8 +55,17 @@ private:
 
 public:
 
-  //RaceX
-  SHGamepadClutch(byte leftPaddlePin, byte rightPaddlePin, int leftMinimumInputValue, int leftMaximumInputValue, double leftExponentialFactor, int rightMinimumInputValue, int rightMaximumInputValue, double rightExponentialFactor) {
+  //Constructor
+  SHGamepadClutch(
+    byte leftPaddlePin,
+    byte rightPaddlePin,
+    int leftMinimumInputValue,
+    int leftMaximumInputValue,
+    double leftExponentialFactor,
+    int rightMinimumInputValue,
+    int rightMaximumInputValue,
+    double rightExponentialFactor,
+    bool raceXControlled = false) {
 
     this->leftPaddlePin = leftPaddlePin;
     this->rightPaddlePin = rightPaddlePin;
@@ -69,56 +78,69 @@ public:
 
     this->paddleClutch.setLeftPaddleRange(0, 1023);
     this->paddleClutch.setRightPaddleRange(0, 1023);
-    this->isRaceXControlled = true;
 
-    pinMode(bitePointPin, INPUT_PULLUP);
+    this->isRaceXControlled = raceXControlled;
 
     this->samplingRate = 10;
   }
 
   //Button
-  SHGamepadClutch(byte leftPaddlePin, byte rightPaddlePin, byte bitePointPin, int leftMinimumInputValue, int leftMaximumInputValue, double leftExponentialFactor, int rightMinimumInputValue, int rightMaximumInputValue, double rightExponentialFactor, bool pullup) {
+  SHGamepadClutch(
+    byte leftPaddlePin,
+    byte rightPaddlePin,
+    int leftMinimumInputValue,
+    int leftMaximumInputValue,
+    double leftExponentialFactor,
+    int rightMinimumInputValue,
+    int rightMaximumInputValue,
+    double rightExponentialFactor,
+    byte bitePointPin,
+    bool pullup)
+    : SHGamepadClutch(
+      leftPaddlePin,
+      rightPaddlePin,
+      leftMinimumInputValue,
+      leftMaximumInputValue,
+      leftExponentialFactor,
+      rightMinimumInputValue,
+      rightMaximumInputValue,
+      rightExponentialFactor) {
 
-    this->leftPaddlePin = leftPaddlePin;
-    this->rightPaddlePin = rightPaddlePin;
     this->bitePointPin = bitePointPin;
-    this->leftExponentialFactor = leftExponentialFactor;
-    this->leftMinimumInputValue = leftMinimumInputValue;
-    this->leftMaximumInputValue = leftMaximumInputValue;
-    this->rightMinimumInputValue = rightMinimumInputValue;
-    this->rightMaximumInputValue = rightMaximumInputValue;
-    this->rightExponentialFactor = rightExponentialFactor;
-
-    this->paddleClutch.setLeftPaddleRange(0, 1023);
-    this->paddleClutch.setRightPaddleRange(0, 1023);
     this->isBitePointButton = true;
     this->bitePointPullup = pullup;
 
     pinMode(bitePointPin, bitePointPullup ? INPUT_PULLUP : INPUT);
-
-    this->samplingRate = 10;
   }
 
   //Potentiometer
-  SHGamepadClutch(byte leftPaddlePin, byte rightPaddlePin, byte bitePointPin, int leftMinimumInputValue, int leftMaximumInputValue, double leftExponentialFactor, int rightMinimumInputValue, int rightMaximumInputValue, double rightExponentialFactor, int bitePointMinimumInputValue, int bitePointMaximumInputValue) {
+  SHGamepadClutch(
+    byte leftPaddlePin,
+    byte rightPaddlePin,
+    int leftMinimumInputValue,
+    int leftMaximumInputValue,
+    double leftExponentialFactor,
+    int rightMinimumInputValue,
+    int rightMaximumInputValue,
+    double rightExponentialFactor,
+    byte bitePointPin,
+    int bitePointMinimumInputValue,
+    int bitePointMaximumInputValue)
+    : SHGamepadClutch(
+      leftPaddlePin,
+      rightPaddlePin,
+      leftMinimumInputValue,
+      leftMaximumInputValue,
+      leftExponentialFactor,
+      rightMinimumInputValue,
+      rightMaximumInputValue,
+      rightExponentialFactor) {
 
-    this->leftPaddlePin = leftPaddlePin;
-    this->rightPaddlePin = rightPaddlePin;
     this->bitePointPin = bitePointPin;
     this->bitePointMinimumInputValue = bitePointMinimumInputValue;
     this->bitePointMaximumInputValue = bitePointMaximumInputValue;
-    this->leftExponentialFactor = leftExponentialFactor;
-    this->leftMinimumInputValue = leftMinimumInputValue;
-    this->leftMaximumInputValue = leftMaximumInputValue;
-    this->rightMinimumInputValue = rightMinimumInputValue;
-    this->rightMaximumInputValue = rightMaximumInputValue;
-    this->rightExponentialFactor = rightExponentialFactor;
 
-    this->paddleClutch.setLeftPaddleRange(0, 1023);
-    this->paddleClutch.setRightPaddleRange(0, 1023);
     this->paddleClutch.setBitePointPotRange(0, 1023);
-
-    this->samplingRate = 10;
   }
 
   void SetJoystick(Joystick_* joystick) {
